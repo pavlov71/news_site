@@ -6,21 +6,13 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class RegistrationRequest extends FormRequest
 {
+    use AuthAttribute;
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
         return true;
-    }
-
-    public function attributes(): array
-    {
-        return [
-            'name' => 'имя пользователя',
-            'email' => 'адрес электронной почты',
-            'password' => 'пароль',
-        ];
     }
 
     /**
