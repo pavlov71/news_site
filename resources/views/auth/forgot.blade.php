@@ -18,9 +18,14 @@
         <div class="bg-white w-96 shadow-xl rounded p-5">
             <h1 class="text-3xl font-medium">Восстановление пароля</h1>
 
-            <form class="space-y-5 mt-5" method="POST" action="">
+            <form class="space-y-5 mt-5" method="POST" action="{{ route('forgot-store') }}">
+                @csrf
 
-                <input name="email" type="text" class="w-full h-12 border rounded px-3" placeholder="Email" />
+                <input name="email" value="{{ old('email') }}" type="text" class="w-full h-12 border rounded px-3 @error('email') border-red-500 @enderror" placeholder="Email" />
+
+                @error('email')
+                <p class="text-red-500"> {{ $message }} </p>
+                @enderror
 
                 <div>
                     <a href="{{ route('login') }}" class="font-medium text-blue-900 hover:bg-blue-300 rounded-md p-2">Вспомнил пароль</a>

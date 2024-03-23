@@ -27,6 +27,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/registration', [AuthController::class, 'showRegisterForm'])->name('registration');
     Route::post('/registration', [AuthController::class, 'storeRegister'])->name('register-store');
     Route::get('/restore_password', [AuthController::class, 'showRestoreForm'])->name('forgot');
+    Route::post('/restore_password', [AuthController::class, 'storeRestoreForm'])->name('forgot-store');
 });
 
 

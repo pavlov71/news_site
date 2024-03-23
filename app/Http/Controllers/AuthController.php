@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\RestoreAction;
 use App\Actions\UserCreateAction;
 use App\DTO\UserCreateDTO;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegistrationRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\Auth\RestorePasswordRequest;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -32,6 +33,11 @@ class AuthController extends Controller
         return redirect(route('home'));
     }
 
+    public function storeRestoreForm(RestorePasswordRequest $request, RestoreAction $action)
+    {
+        $action($request->validated());
+        return redirect(route('login'));
+    }
     public function storeLogin(LoginRequest $request)
     {
         if (Auth::attempt($request->validated())) {
