@@ -17,10 +17,10 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => $this->faker->realText(120),
+            'title' => $this->faker->name(),
             'description' => $this->faker->realText(),
             'preview' => $this->faker->realText(50),
-            'thumbnail' => null,
+            'thumbnail' => $this->faker->image('public/storage/posts', 640, 520, null, false),
         ];
     }
 }
