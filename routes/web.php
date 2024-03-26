@@ -15,8 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [WelcomeController::class, 'index'])->name('home');
-//Route::get('/posts/{post}', [WelcomeController::class, 'show'])->name('post.show');
+Route::get('/', [WelcomeController::class, 'index_main'])->name('home');
+Route::get('/posts', [WelcomeController::class, 'index'])->name('index-posts');
+Route::get('/posts/{post}', [WelcomeController::class, 'show'])->name('post.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

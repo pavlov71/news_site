@@ -36,8 +36,6 @@
         <div class="sm:mb-0 self-center">
             @yield('guest')
             @yield('login')
-            <!--
-            -->
         </div>
     </nav>
 @show
