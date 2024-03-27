@@ -16,15 +16,21 @@
         <div>
             <section class="rounded-b-lg mt-4">
                 @auth('web')
-                    <form method="POST" action="">
+                    <form method="POST" action="{{route('comment-store', $post)}}">
+                        @csrf
 
-                        <textarea name="text"
+                        <textarea name="description"
                                   class="w-full shadow-inner p-4 border-0 mb-4 rounded-lg focus:shadow-outline text-2xl border border-red-500"
                                   placeholder="Ваш комментарий..." spellcheck="false">
-
                         </textarea>
 
-                        {{--                    <p class="text-red-500">Ошибка</p>--}}
+                        @error('description')
+                            <p class="text-red-500">{{$message}}</p>
+                        @enderror
+
+                        @error('user_id')
+                        <p class="text-red-500">{{$message}}</p>
+                        @enderror
 
                         <button type="submit"
                                 class="font-bold py-2 px-4 w-full bg-purple-400 text-lg text-white shadow-md rounded-lg ">
@@ -33,7 +39,7 @@
                     </form>
                 @endauth
                 <div id="task-comments" class="pt-4">
-                   @each('posts.comments', $post->comments, 'comment')
+                    @each('posts.comments', $post->comments, 'comment')
                 </div>
             </section>
 
