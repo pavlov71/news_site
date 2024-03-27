@@ -16,13 +16,14 @@ class WelcomeController extends Controller
 
     public function index()
     {
-        $posts = Post::query()->orderBy('created_at', 'DESC')->paginate(3);
+        $posts = Post::query()->orderBy('id', 'DESC')->paginate(3);
         $pagination = true;
         return view('welcome', compact('posts', 'pagination'));
     }
 
     public function show(Request $request, Post $post)
     {
-        return view ('posts_show', );
+        $comments = $post->comments;
+        return view ('posts_show', compact('post', 'comments') );
     }
 }

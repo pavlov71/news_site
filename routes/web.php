@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,6 +22,7 @@ Route::get('/posts/{post}', [WelcomeController::class, 'show'])->name('post.show
 
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comment-store');
 });
 
 Route::middleware('guest')->group(function () {
