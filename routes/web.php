@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WelcomeController::class, 'index_main'])->name('home');
 Route::get('/posts', [WelcomeController::class, 'index'])->name('index-posts');
 Route::get('/posts/{post}', [WelcomeController::class, 'show'])->name('post.show');
+Route::get('/feedback', [FeedbackController::class, 'create'])->name('feedback');
+Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback-store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

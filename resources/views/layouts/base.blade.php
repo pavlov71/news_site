@@ -45,7 +45,9 @@
 
 @section('footer')
     <div>
-        Обратная связь
+        <a href="{{route('feedback')}}" class="border text-fuchsia-700 text-2xl">
+            Обратная связь
+        </a>
     </div>
 @show
 </body>
