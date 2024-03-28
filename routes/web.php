@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminLoginController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedbackController;
@@ -26,6 +27,12 @@ Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback-s
 Route::middleware('auth')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comment-store');
+});
+
+Route::prefix('admin')->group(function (){
+    Route::get('/', [AdminLoginController::class, 'login'])->name('login-admin');
+    Route::post('/', [AdminLoginController::class, 'loginProcess'])->name('login-admin-process');
+
 });
 
 Route::middleware('guest')->group(function () {
