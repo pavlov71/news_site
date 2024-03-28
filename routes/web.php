@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminLoginController;
+use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedbackController;
@@ -29,11 +30,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comment-store');
 });
 
-Route::prefix('admin')->group(function (){
+Route::prefix('admin')->middleware('guest')->group(function (){
     Route::get('/', [AdminLoginController::class, 'login'])->name('login-admin');
     Route::post('/', [AdminLoginController::class, 'loginProcess'])->name('login-admin-process');
 
+    Route::middleware('auth:admin')->group(function () {
+        Route::get('/posts', [AdminPostController::class, 'index'])->name('admin-post-index');
+    });
 });
+
+Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware('auth:admin')->name('admin-post-index');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');

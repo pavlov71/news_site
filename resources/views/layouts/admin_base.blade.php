@@ -3,13 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Blog</title>
+    @section('title')
+        <title>Панель администратора</title>
+    @show
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+
 <div>
     <div x-data="{ sidebarOpen: false }" class="flex h-screen bg-gray-200">
         <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false" class="fixed z-20 inset-0 bg-black opacity-50 transition-opacity lg:hidden"></div>
@@ -74,8 +76,11 @@
             </header>
 
             <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
+                @section('content')
 
+                @show
             </main>
+
         </div>
     </div>
 </div>

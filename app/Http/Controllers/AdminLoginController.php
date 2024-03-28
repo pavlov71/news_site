@@ -15,9 +15,9 @@ class AdminLoginController extends Controller
     public function loginProcess(AdminLoginRequest $request)
     {
 
-        if (Auth::attempt($request->validated())) {
+        if (Auth::guard('admin')->attempt($request->validated())) {
             $request->session()->regenerate();
-            return redirect(route('home'));
+            return redirect(route('admin-post-index'));
         }
 
         return redirect(route('login-admin'))->withErrors([
