@@ -30,16 +30,19 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comment-store');
 });
 
-Route::prefix('admin')->middleware('guest')->group(function (){
-    Route::get('/', [AdminLoginController::class, 'login'])->name('login-admin');
-    Route::post('/', [AdminLoginController::class, 'loginProcess'])->name('login-admin-process');
+Route::prefix('admin')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('/', [AdminLoginController::class, 'login'])->name('login-admin');
+        Route::post('/', [AdminLoginController::class, 'loginProcess'])->name('login-admin-process');
+    });
 
     Route::middleware('auth:admin')->group(function () {
-        Route::get('/posts', [AdminPostController::class, 'index'])->name('admin-post-index');
+        Route::get('/logout', [AdminLoginController::class, 'logout'])->name('logout-admin');
+        Route::resource('/posts', AdminPostController::class);
     });
 });
 
-Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware('auth:admin')->name('admin-post-index');
+//Route::get('/admin/posts', [AdminPostController::class, 'index'])->middleware('auth:admin')->name('admin-post-index');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');

@@ -17,11 +17,18 @@ class AdminLoginController extends Controller
 
         if (Auth::guard('admin')->attempt($request->validated())) {
             $request->session()->regenerate();
-            return redirect(route('admin-post-index'));
+            return redirect(route('posts.index'));
         }
 
         return redirect(route('login-admin'))->withErrors([
             'password' => 'Пароль введен не верно',
         ]);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect(route('login-admin'));
+
     }
 }
