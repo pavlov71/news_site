@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 255)->comment('Заголовок статьи');
+            $table->string('title')->comment('Заголовок статьи');
             $table->text('description')->comment('Содержимое статьи');
             $table->string('preview', 50)->comment('краткое описание статьи');
             $table->string('thumbnail')->nullable();
