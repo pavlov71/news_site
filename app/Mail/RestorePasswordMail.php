@@ -44,7 +44,7 @@ class RestorePasswordMail extends Mailable implements ShouldQueue
             with: [
                 'fio' => $this->user_name,
                 'newPassword' => $this->new_password,
-                ]
+            ]
         );
     }
 
