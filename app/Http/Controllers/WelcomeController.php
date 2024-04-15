@@ -10,15 +10,13 @@ class WelcomeController extends Controller
     public function index_main()
     {
         $posts = Post::query()->orderBy('created_at', 'DESC')->limit(3)->get();
-        $pagination = false;
-        return view('welcome', compact('posts', 'pagination'));
+        return view('welcome', compact('posts' ));
     }
 
     public function index()
     {
         $posts = Post::query()->orderBy('id', 'DESC')->paginate(3);
-        $pagination = true;
-        return view('welcome', compact('posts', 'pagination'));
+        return view('welcome', compact('posts'));
     }
 
     public function show(Request $request, Post $post)

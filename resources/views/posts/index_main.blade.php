@@ -4,7 +4,7 @@
         <div class="px-4 py-8 max-w-xl">
             <div class="bg-white shadow-2xl">
                 <div>
-                    @if($pagination)
+                    @if($posts instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator)
                         <a href="{{route ('post.show', $post->id)}}">
                             <img src="/storage/posts/{{ $post->thumbnail }}"/>
                         </a>
@@ -23,8 +23,7 @@
             </div>
         </div>
     @endforeach
-
-    @if($pagination)
-        {{$posts->links()}}
+    @if($posts instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator)
+        {{ $posts->links() }}
     @endif
 </div>
